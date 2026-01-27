@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/Button"
+import { NavLink } from "react-router-dom"
 import { LayoutDashboard, Activity, Settings, GitCommit, Database } from "lucide-react"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> { }
@@ -13,14 +14,22 @@ export function Sidebar({ className }: SidebarProps) {
                         Eng Dashboard
                     </h2>
                     <nav className="space-y-1">
-                        <Button variant="secondary" className="w-full justify-start">
-                            <LayoutDashboard className="mr-2 h-4 w-4" />
-                            Overview
-                        </Button>
-                        <Button variant="ghost" className="w-full justify-start">
-                            <Activity className="mr-2 h-4 w-4" />
-                            Activity
-                        </Button>
+                        <NavLink to="/" end>
+                            {({ isActive }) => (
+                                <Button variant={isActive ? "secondary" : "ghost"} className="w-full justify-start">
+                                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                                    Overview
+                                </Button>
+                            )}
+                        </NavLink>
+                        <NavLink to="/activity">
+                            {({ isActive }) => (
+                                <Button variant={isActive ? "secondary" : "ghost"} className="w-full justify-start">
+                                    <Activity className="mr-2 h-4 w-4" />
+                                    Activity
+                                </Button>
+                            )}
+                        </NavLink>
                         <Button variant="ghost" className="w-full justify-start">
                             <GitCommit className="mr-2 h-4 w-4" />
                             Deployments
