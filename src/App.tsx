@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { AppShell } from "@/components/layout/AppShell"
 import { KPIGrid } from "@/features/dashboard/components/KPIGrid"
+import { ActivitySection } from "@/features/dashboard/components/ActivitySection"
 import { api } from "@/lib/api"
 import type { DashboardData } from "@/types/dashboard"
 
@@ -21,7 +22,10 @@ function App() {
 
         {/* 1. KPI Section */}
         {data ? (
-          <KPIGrid metrics={data.metrics} />
+          <>
+            <KPIGrid metrics={data.metrics} />
+            <ActivitySection data={data.activity} />
+          </>
         ) : (
           <p>Loading metrics...</p>
         )}
