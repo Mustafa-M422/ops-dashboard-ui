@@ -1,0 +1,119 @@
+{
+    "lastUpdated": "2024-03-20T10:30:00Z",
+    "metrics": [
+        {
+            "id": "m1",
+            "label": "Total Deployments",
+            "value": "2,345",
+            "changePercentage": 12.5,
+            "trend": "up",
+            "description": "Total successful deployments this month"
+        },
+        {
+            "id": "m2",
+            "label": "Avg. Build Time",
+            "value": "4m 12s",
+            "changePercentage": -5.2,
+            "trend": "down",
+            "description": "Average time from push to deployed"
+        },
+        {
+            "id": "m3",
+            "label": "Error Rate",
+            "value": "0.02%",
+            "changePercentage": 0.01,
+            "trend": "neutral",
+            "description": "Production 5xx errors"
+        }
+    ],
+    "activity": [
+        {
+            "timestamp": "2024-03-20T06:00:00Z",
+            "users": 120
+        },
+        {
+            "timestamp": "2024-03-20T07:00:00Z",
+            "users": 185
+        },
+        {
+            "timestamp": "2024-03-20T08:00:00Z",
+            "users": 340
+        },
+        {
+            "timestamp": "2024-03-20T09:00:00Z",
+            "users": 290
+        },
+        {
+            "timestamp": "2024-03-20T10:00:00Z",
+            "users": 410
+        },
+        {
+            "timestamp": "2024-03-20T11:00:00Z",
+            "users": 450
+        },
+        {
+            "timestamp": "2024-03-20T12:00:00Z",
+            "users": 480
+        },
+        {
+            "timestamp": "2024-03-20T13:00:00Z",
+            "users": 420
+        },
+        {
+            "timestamp": "2024-03-20T14:00:00Z",
+            "users": 380
+        }
+    ],
+    "recentDeployments": [
+        {
+            "id": "d-101",
+            "projectName": "web-client",
+            "commitMessage": "feat: update dashboard filters",
+            "commitHash": "8a2b9c1",
+            "authorName": "Alice Dev",
+            "status": "success",
+            "environment": "production",
+            "deployedAt": "2024-03-20T10:15:00Z"
+        },
+        {
+            "id": "d-102",
+            "projectName": "api-gateway",
+            "commitMessage": "fix: auth token expiration bug",
+            "commitHash": "e4f5g6h",
+            "authorName": "Bob Engineer",
+            "status": "failed",
+            "environment": "staging",
+            "deployedAt": "2024-03-20T09:55:00Z"
+        },
+        {
+            "id": "d-103",
+            "projectName": "web-client",
+            "commitMessage": "chore: dependency upgrades",
+            "commitHash": "1x2y3z4",
+            "authorName": "Charlie Ops",
+            "status": "in-progress",
+            "environment": "production",
+            "deployedAt": "2024-03-20T10:28:00Z"
+        },
+        {
+            "id": "d-104",
+            "projectName": "payment-service",
+            "commitMessage": "feat: add stripe webhooks",
+            "commitHash": "b2c3d4e",
+            "authorName": "Diana Finance",
+            "status": "queued",
+            "environment": "staging",
+            "deployedAt": "2024-03-20T10:45:00Z"
+        },
+        {
+            "id": "d-105",
+            "projectName": "auth-service",
+            "commitMessage": "fix: race condition in login",
+            "commitHash": "f5g6h7i",
+            "authorName": "Ethan Security",
+            "status": "success",
+            "environment": "production",
+            "deployedAt": "2024-03-20T08:30:00Z"
+        }
+    ]
+}

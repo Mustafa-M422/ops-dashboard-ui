@@ -1,23 +1,31 @@
+import { useEffect } from "react"
+import { AppShell } from "@/components/layout/AppShell"
 import { Button } from "@/components/ui/Button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { Skeleton } from "@/components/ui/Skeleton"
 import { Activity } from "lucide-react"
+import { api } from "@/lib/api"
 
 function App() {
+  useEffect(() => {
+    api.getDashboardData().then((data) => {
+      console.log("Mock API Data Fetched:", data)
+    })
+  }, [])
+
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center p-8 space-y-8 bg-slate-50 dark:bg-slate-900">
-      <div className="w-full max-w-3xl space-y-4">
+    <AppShell>
+      <div className="space-y-4">
         <h1 className="text-3xl font-bold">Design System Verification</h1>
+        <p className="text-muted-foreground">Check console for API data...</p>
 
         {/* Buttons */}
         <div className="flex gap-4 items-center">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="outline">Outline</Button>
-          <Button variant="destructive" className="bg-red-500 text-white hover:bg-red-600">
-            Destructive (Overridden)
-          </Button>
+          <Button variant="destructive">Destructive</Button>
           <Button variant="ghost">Ghost</Button>
           <Button size="icon"><Activity className="h-4 w-4" /></Button>
         </div>
@@ -60,7 +68,7 @@ function App() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </AppShell>
   )
 }
 
