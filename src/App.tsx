@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { AppShell } from "@/components/layout/AppShell"
 import { KPIGrid } from "@/features/dashboard/components/KPIGrid"
 import { ActivitySection } from "@/features/dashboard/components/ActivitySection"
+import { DeploymentTable } from "@/features/dashboard/components/DeploymentTable"
 import { api } from "@/lib/api"
 import type { DashboardData } from "@/types/dashboard"
 
@@ -25,6 +26,7 @@ function App() {
           <>
             <KPIGrid metrics={data.metrics} />
             <ActivitySection data={data.activity} />
+            <DeploymentTable data={data.recentDeployments} />
           </>
         ) : (
           <p>Loading metrics...</p>
