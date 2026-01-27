@@ -12,7 +12,7 @@ export function Sidebar({ className }: SidebarProps) {
                     <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
                         Eng Dashboard
                     </h2>
-                    <div className="space-y-1">
+                    <nav className="space-y-1">
                         <Button variant="secondary" className="w-full justify-start">
                             <LayoutDashboard className="mr-2 h-4 w-4" />
                             Overview
@@ -33,7 +33,7 @@ export function Sidebar({ className }: SidebarProps) {
                             <Settings className="mr-2 h-4 w-4" />
                             Settings
                         </Button>
-                    </div>
+                    </nav>
                 </div>
             </div>
         </div>
