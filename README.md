@@ -85,6 +85,19 @@ src/
 - **Theming**: Edit `src/index.css` to tweak CSS variables (Colors, Radius) that power the Tailwind config.
 - **Data**: Update `src/lib/api.ts` to swap the mock `setTimeout` with real `fetch` calls to your backend.
 
----
+
+## Visuals
+
+- **Dashboard**
+<img width="1882" height="892" alt="image" src="https://github.com/user-attachments/assets/00e4bcc3-47d1-49c6-bc07-c78485ac3329" />
+
+<img width="1513" height="597" alt="image" src="https://github.com/user-attachments/assets/5d5a4584-59f9-4fd2-9a0a-f337a91cc739" />
+
+
+- **Activity Page**
+<img width="1887" height="827" alt="image" src="https://github.com/user-attachments/assets/529de1d8-48fb-47b3-80a3-3035f05f25e5" />
+
+
+
 
 *Verified locally on Windows.*
