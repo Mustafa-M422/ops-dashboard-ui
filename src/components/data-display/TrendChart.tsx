@@ -5,16 +5,18 @@ import { format } from "date-fns"
 interface TrendChartProps {
     data: { timestamp: string;[key: string]: any }[]
     dataKey: string
-    title: string
+    title?: string
     color?: string
 }
 
 export function TrendChart({ data, dataKey, title, color = "#2563eb" }: TrendChartProps) {
     return (
-        <Card className="col-span-4 lg:col-span-3"> {/* Default sizing overrides can happen via parent grid */}
-            <CardHeader>
-                <CardTitle>{title}</CardTitle>
-            </CardHeader>
+        <Card className="col-span-4 lg:col-span-3 border-none shadow-none"> {/* Default sizing overrides can happen via parent grid */}
+            {title && (
+                <CardHeader>
+                    <CardTitle>{title}</CardTitle>
+                </CardHeader>
+            )}
             <CardContent className="pl-2">
                 <div className="h-[300px] w-full">
                     <ResponsiveContainer width="100%" height="100%">

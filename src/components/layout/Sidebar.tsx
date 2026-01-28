@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/Button"
 import { NavLink } from "react-router-dom"
-import { LayoutDashboard, Activity, Settings, GitCommit, Database } from "lucide-react"
+import { LayoutDashboard, Activity, Settings, GitCommit, Database, Terminal } from "lucide-react"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> { }
 
@@ -9,10 +9,16 @@ export function Sidebar({ className }: SidebarProps) {
     return (
         <div className={cn("pb-12 h-screen border-r bg-background", className)}>
             <div className="space-y-4 py-4">
+
                 <div className="px-3 py-2">
-                    <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-                        Eng Dashboard
-                    </h2>
+                    <div className="mb-6 flex items-center px-4">
+                        <div className="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                            <Terminal className="h-5 w-5" />
+                        </div>
+                        <h2 className="text-xl font-bold tracking-tight">
+                            EngBoard
+                        </h2>
+                    </div>
                     <nav className="space-y-1">
                         <NavLink to="/" end>
                             {({ isActive }) => (
