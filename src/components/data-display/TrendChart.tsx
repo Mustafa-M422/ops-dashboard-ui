@@ -9,7 +9,17 @@ interface TrendChartProps {
     color?: string
 }
 
-export function TrendChart({ data, dataKey, title, color = "#2563eb" }: TrendChartProps) {
+import { useTheme } from "@/components/theme-provider"
+
+export function TrendChart({ data, dataKey, title, color }: TrendChartProps) {
+    const { theme } = useTheme()
+
+    // Determine effective color based on theme if not explicitly provided
+    const isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+
+    const axisColor = isDark ? "#a1a1aa" : "#888888"
+    const lineColor = color || (isDark ? "#60a5fa" : "#2563eb") // blue-400 : blue-600
+
     return (
         <Card className="col-span-4 lg:col-span-3 border-none shadow-none"> {/* Default sizing overrides can happen via parent grid */}
             {title && (
@@ -23,29 +33,35 @@ export function TrendChart({ data, dataKey, title, color = "#2563eb" }: TrendCha
                         <LineChart data={data}>
                             <XAxis
                                 dataKey="timestamp"
-                                stroke="#888888"
+                                stroke={axisColor}
                                 fontSize={12}
                                 tickLine={false}
                                 axisLine={false}
                                 tickFormatter={(value) => format(new Date(value), "HH:mm")}
                             />
                             <YAxis
-                                stroke="#888888"
+                                stroke={axisColor}
                                 fontSize={12}
                                 tickLine={false}
                                 axisLine={false}
                                 tickFormatter={(value) => `${value}`}
                             />
                             <Tooltip
-                                contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                                contentStyle={{
+                                    backgroundColor: isDark ? '#1f2937' : '#ffffff',
+                                    borderColor: isDark ? '#374151' : '#e5e7eb',
+                                    borderRadius: '8px',
+                                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                                }}
+                                itemStyle={{ color: isDark ? '#f3f4f6' : '#1f2937' }}
                                 labelFormatter={(label) => format(new Date(label), "MMM d, HH:mm")}
                             />
                             <Line
                                 type="monotone"
                                 dataKey={dataKey}
-                                stroke={color}
+                                stroke={lineColor}
                                 strokeWidth={2}
-                                activeDot={{ r: 6, style: { fill: color, opacity: 0.8 } }}
+                                activeDot={{ r: 6, style: { fill: lineColor, opacity: 0.8 } }}
                                 dot={false}
                             />
                         </LineChart>

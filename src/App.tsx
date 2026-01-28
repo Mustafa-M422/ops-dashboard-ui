@@ -1,19 +1,44 @@
-import { Routes, Route } from "react-router-dom"
+import { Navigate, Route, Routes, useLocation } from "react-router-dom"
 import { AppShell } from "@/components/layout/AppShell"
 import { DashboardPage } from "@/features/dashboard/DashboardPage"
 import { ActivityPage } from "@/features/activity/ActivityPage"
+import { LoginPage } from "@/features/auth/LoginPage"
 
 import { ThemeProvider } from "@/components/theme-provider"
+import { AuthProvider, useAuth } from "@/context/AuthContext"
+
+function RequireAuth({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated } = useAuth()
+  const location = useLocation()
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />
+  }
+
+  return children
+}
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <AppShell>
+      <AuthProvider>
         <Routes>
-          <Route path="/" element={<DashboardPage />} />
-          <Route path="/activity" element={<ActivityPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/*"
+            element={
+              <RequireAuth>
+                <AppShell>
+                  <Routes>
+                    <Route path="/" element={<DashboardPage />} />
+                    <Route path="/activity" element={<ActivityPage />} />
+                  </Routes>
+                </AppShell>
+              </RequireAuth>
+            }
+          />
         </Routes>
-      </AppShell>
+      </AuthProvider>
     </ThemeProvider>
   )
 }
