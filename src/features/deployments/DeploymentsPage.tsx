@@ -4,7 +4,7 @@ import { DeploymentTable } from "@/features/dashboard/components/DeploymentTable
 import { DashboardSkeleton } from "@/features/dashboard/components/DashboardSkeleton"
 import { api } from "@/lib/api"
 import type { DashboardData, Deployment, DeploymentStatus, Environment } from "@/types/dashboard"
-import { AlertCircle, Filter } from "lucide-react"
+import { AlertCircle, Search, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 
 export function DeploymentsPage() {
@@ -12,16 +12,21 @@ export function DeploymentsPage() {
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     
-    // Filters
+    // Filters & Search
+    const [searchQuery, setSearchQuery] = useState("")
     const [statusFilter, setStatusFilter] = useState<DeploymentStatus | "all">("all")
     const [envFilter, setEnvFilter] = useState<Environment | "all">("all")
 
-    useEffect(() => {
+    const loadData = () => {
         setIsLoading(true)
         api.getDashboardData()
             .then(setData)
             .catch(() => setError("Failed to load deployment data."))
             .finally(() => setIsLoading(false))
+    }
+
+    useEffect(() => {
+        loadData()
     }, [])
 
     if (isLoading) return <DashboardSkeleton />
@@ -47,59 +52,88 @@ export function DeploymentsPage() {
 
     // Filter logic
     const filteredDeployments = data.recentDeployments.filter((deployment: Deployment) => {
-        const statusMatch = statusFilter === "all" || deployment.status === statusFilter
-        const envMatch = envFilter === "all" || deployment.environment === envFilter
-        return statusMatch && envMatch
+        const matchesSearch = 
+            deployment.projectName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            deployment.commitMessage.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            deployment.authorName.toLowerCase().includes(searchQuery.toLowerCase())
+            
+        const matchesStatus = statusFilter === "all" || deployment.status === statusFilter
+        const matchesEnv = envFilter === "all" || deployment.environment === envFilter
+        
+        return matchesSearch && matchesStatus && matchesEnv
     })
 
     return (
         <div className="space-y-6">
-            <div>
-                <h1 className="text-3xl font-bold tracking-tight">Deployments</h1>
-                <p className="text-muted-foreground">
-                    Manage and view deployment history across all environments.
-                </p>
+            <div className="flex items-center justify-between">
+                <div>
+                    <h1 className="text-3xl font-bold tracking-tight">Deployments</h1>
+                    <p className="text-muted-foreground">
+                        Manage and integrity check all system deployments.
+                    </p>
+                </div>
+                <Button variant="outline" size="sm" onClick={loadData}>
+                    <RefreshCw className="mr-2 h-4 w-4" />
+                    Refresh
+                </Button>
+            </div>
+
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div className="relative flex-1 md:max-w-sm">
+                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <input
+                        type="text"
+                        placeholder="Search projects, commits, or authors..."
+                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 pl-9 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                </div>
+                <div className="flex items-center gap-2">
+                    <div className="flex items-center space-x-2">
+                        <select 
+                            className="h-9 w-[150px] rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                            value={statusFilter}
+                            onChange={(e) => setStatusFilter(e.target.value as DeploymentStatus | "all")}
+                        >
+                            <option value="all">All Statuses</option>
+                            <option value="success">Success</option>
+                            <option value="failed">Failed</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="queued">Queued</option>
+                        </select>
+                        <select
+                            className="h-9 w-[150px] rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                            value={envFilter}
+                            onChange={(e) => setEnvFilter(e.target.value as Environment | "all")}
+                        >
+                            <option value="all">All Environments</option>
+                            <option value="production">Production</option>
+                            <option value="staging">Staging</option>
+                            <option value="development">Development</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <Card>
                 <CardHeader>
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <CardTitle>Deployment History</CardTitle>
-                            <CardDescription>
-                                A detailed log of all deployment activities.
-                            </CardDescription>
-                        </div>
-                        <div className="flex items-center gap-2">
-                           <div className="flex items-center space-x-2">
-                                <Filter className="h-4 w-4 text-muted-foreground" />
-                                <select 
-                                    className="h-9 w-[150px] rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                                    value={statusFilter}
-                                    onChange={(e) => setStatusFilter(e.target.value as DeploymentStatus | "all")}
-                                >
-                                    <option value="all">All Statuses</option>
-                                    <option value="success">Success</option>
-                                    <option value="failed">Failed</option>
-                                    <option value="in-progress">In Progress</option>
-                                    <option value="queued">Queued</option>
-                                </select>
-                                <select
-                                    className="h-9 w-[150px] rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                                    value={envFilter}
-                                    onChange={(e) => setEnvFilter(e.target.value as Environment | "all")}
-                                >
-                                    <option value="all">All Environments</option>
-                                    <option value="production">Production</option>
-                                    <option value="staging">Staging</option>
-                                    <option value="development">Development</option>
-                                </select>
-                           </div>
-                        </div>
-                    </div>
+                    <CardTitle>Recent Deployments</CardTitle>
+                    <CardDescription>
+                        A list of recent deployments to your environments.
+                    </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <DeploymentTable data={filteredDeployments} />
+                    <div className="mt-4 flex items-center justify-between px-2">
+                        <div className="text-sm text-muted-foreground">
+                            Showing {filteredDeployments.length} results
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <Button variant="outline" size="sm" disabled>Previous</Button>
+                            <Button variant="outline" size="sm" disabled>Next</Button>
+                        </div>
+                    </div>
                 </CardContent>
             </Card>
         </div>
