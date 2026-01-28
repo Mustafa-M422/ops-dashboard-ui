@@ -92,25 +92,25 @@ export function DeploymentsPage() {
                 <div className="flex items-center gap-2">
                     <div className="flex items-center space-x-2">
                         <select 
-                            className="h-9 w-[150px] rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                            className="h-9 w-[150px] rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                             value={statusFilter}
                             onChange={(e) => setStatusFilter(e.target.value as DeploymentStatus | "all")}
                         >
-                            <option value="all">All Statuses</option>
-                            <option value="success">Success</option>
-                            <option value="failed">Failed</option>
-                            <option value="in-progress">In Progress</option>
-                            <option value="queued">Queued</option>
+                            <option value="all" className="bg-background text-foreground">All Statuses</option>
+                            <option value="success" className="bg-background text-foreground">Success</option>
+                            <option value="failed" className="bg-background text-foreground">Failed</option>
+                            <option value="in-progress" className="bg-background text-foreground">In Progress</option>
+                            <option value="queued" className="bg-background text-foreground">Queued</option>
                         </select>
                         <select
-                            className="h-9 w-[150px] rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                            className="h-9 w-[150px] rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                             value={envFilter}
                             onChange={(e) => setEnvFilter(e.target.value as Environment | "all")}
                         >
-                            <option value="all">All Environments</option>
-                            <option value="production">Production</option>
-                            <option value="staging">Staging</option>
-                            <option value="development">Development</option>
+                            <option value="all" className="bg-background text-foreground">All Environments</option>
+                            <option value="production" className="bg-background text-foreground">Production</option>
+                            <option value="staging" className="bg-background text-foreground">Staging</option>
+                            <option value="development" className="bg-background text-foreground">Development</option>
                         </select>
                     </div>
                 </div>
