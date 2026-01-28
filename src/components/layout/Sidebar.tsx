@@ -44,10 +44,14 @@ export function Sidebar({ className }: SidebarProps) {
                             <Database className="mr-2 h-4 w-4" />
                             Resources
                         </Button>
-                        <Button variant="ghost" className="w-full justify-start">
-                            <Settings className="mr-2 h-4 w-4" />
-                            Settings
-                        </Button>
+                        <NavLink to="/settings">
+                            {({ isActive }) => (
+                                <Button variant={isActive ? "secondary" : "ghost"} className="w-full justify-start">
+                                    <Settings className="mr-2 h-4 w-4" />
+                                    Settings
+                                </Button>
+                            )}
+                        </NavLink>
                     </nav>
                 </div>
             </div>
