@@ -2,7 +2,6 @@
 
 A modern, responsive internal dashboard for tracking engineering metrics, system health, and deployment velocity. Built with **React**, **TypeScript**, and **Tailwind CSS**.
 
-![Dashboard Preview](./public/vite.svg) *Note: Replace with actual screenshot*
 
 ## Features
 
