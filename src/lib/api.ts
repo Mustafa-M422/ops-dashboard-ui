@@ -8,8 +8,11 @@ export const api = {
     getDashboardData: (): Promise<DashboardData> => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                // Cast mock data to typed interface to ensure contract matching
-                resolve(mockData as unknown as DashboardData);
+                // Inject current timestamp for "live" feel
+                resolve({
+                    ...(mockData as unknown as DashboardData),
+                    lastUpdated: new Date().toISOString(),
+                });
             }, DELAY_MS);
         });
     },
