@@ -2,22 +2,55 @@
 
 A modern, responsive internal dashboard for tracking engineering metrics, system health, and deployment velocity. Built with **React**, **TypeScript**, and **Tailwind CSS**.
 
+This project mirrors how internal dashboards are built in real engineering teams, focusing on clarity, usability, and realistic UI states rather than marketing visuals.
+
+
 
 ## Features
 
-- **Real-time Overview**:
-  - **Key Metrics**: Track Total Deployments, Build Times, and Error Rates.
-  - **Activity Trends**: Visualized active user history using Recharts.
-  - **Recent Deployments**: Status table (Success, Failed, In-Progress) with environment tracking.
-- **"Live" Data Simulation**: Mock API layer simulates network latency and provides real-time "Last Updated" timestamps.
-- **Responsive Layout**:
-  - Collapsible Sidebar navigation.
-  - Mobile-friendly Drawer menu.
-  - Grid-based layouts adapting from Desktop to Mobile.
-- **Modern Design**:
-  - Clean, enterprise-ready UI using `shadcn/ui`-inspired patterns.
-  - Full aesthetic control with Tailwind CSS (HSL variable-based theming).
-- **Navigation**: Client-side routing with `react-router-dom` (Overview vs. Activity views).
+### Real-time Overview
+- **Key Metrics**
+  - Track Total Deployments, Average Build Time, and Error Rates.
+- **Activity Trends**
+  - Visualized active usage history using Recharts.
+- **Recent Deployments**
+  - Status table (Success, Failed, In-Progress) with environment tracking and timestamps.
+
+### UX & State Handling
+- **"Live" Data Simulation**
+  - Mock API layer simulates network latency.
+  - Dynamic “Last Updated” timestamps with active indicator.
+- **Loading States**
+  - Skeleton placeholders for smoother perceived performance.
+- **Error Handling**
+  - Retry action when data fetching fails.
+- **Empty States**
+  - Graceful handling when deployment data is unavailable.
+
+### Layout & Navigation
+- Collapsible Sidebar navigation.
+- Top Navbar with user controls.
+- Client-side routing using `react-router-dom`:
+  - Overview
+  - Activity
+  - Settings
+- Grid-based layouts adapting from Desktop to Mobile.
+
+### User Experience Enhancements
+- **Dark / Light Mode**
+  - Toggle available from the top navigation.
+  - Theme preference persists across sessions.
+- **User Menu**
+  - Displays current signed-in user.
+  - Quick access to Settings and Sign Out.
+- **Settings Page**
+  - Theme selection (Light / Dark / System).
+  - Sign out action.
+
+### Design System
+- Clean, enterprise-ready UI using `shadcn/ui`-inspired component patterns.
+- Fully styled with Tailwind CSS using HSL-based theming tokens.
+- Reusable primitives (Cards, Buttons, Badges, Skeletons).
 
 ## Tech Stack
 
@@ -69,10 +102,11 @@ src/
 ├── components/          # Shared UI components (Buttons, Cards, Inputs)
 │   ├── layout/          # AppShell, Sidebar, Navbar
 │   ├── ui/              # Atom-level design primitives
-│   └── data-display/    # Charts and complex visualizations
+│   └── data-display/    # Charts and tables
 ├── features/            # Feature-specific logic (Domain Driven)
 │   ├── dashboard/       # Overview page components & logic
-│   └── activity/        # Activity page components
+│   ├── activity/        # Activity page components
+│   └── settings/        # User preferences and settings
 ├── lib/                 # Utilities and API mocks
 ├── mocks/               # JSON data fixtures
 ├── types/               # TypeScript interfaces (Data Models)
@@ -88,13 +122,18 @@ src/
 ## Visuals
 
 - **Dashboard**
-<img width="1882" height="892" alt="image" src="https://github.com/user-attachments/assets/00e4bcc3-47d1-49c6-bc07-c78485ac3329" />
+<img width="1890" height="888" alt="image" src="https://github.com/user-attachments/assets/3a5c68bb-293f-41e5-b0f0-6038892403f1" />
 
-<img width="1513" height="597" alt="image" src="https://github.com/user-attachments/assets/5d5a4584-59f9-4fd2-9a0a-f337a91cc739" />
-
+<img width="1890" height="897" alt="image" src="https://github.com/user-attachments/assets/1cfba58b-9b68-4e55-b5c1-98d718587340" />
 
 - **Activity Page**
 <img width="1887" height="827" alt="image" src="https://github.com/user-attachments/assets/529de1d8-48fb-47b3-80a3-3035f05f25e5" />
+
+- **Setting Page**
+<img width="1918" height="807" alt="image" src="https://github.com/user-attachments/assets/22ba71e7-8c1d-40ed-96e0-998dd10756b9" />
+
+- **Deployment Page**
+<img width="1918" height="772" alt="image" src="https://github.com/user-attachments/assets/6e3d8a18-b45a-4dfb-b9d8-3048f12d10ca" />
 
 
 
