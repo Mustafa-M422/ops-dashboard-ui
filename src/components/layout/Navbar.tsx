@@ -1,5 +1,6 @@
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/Button"
+import { ModeToggle } from "@/components/mode-toggle"
 
 interface NavbarProps {
     onMenuClick: () => void
@@ -21,6 +22,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                 <h1 className="text-lg font-semibold">Overview</h1>
             </div>
             <div className="flex items-center gap-4">
+                <ModeToggle />
                 {/* User Profile or other top-right items could go here */}
                 <div className="h-8 w-8 rounded-full bg-muted" />
             </div>

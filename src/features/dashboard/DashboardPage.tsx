@@ -57,7 +57,11 @@ export function DashboardPage() {
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight">Engineering Dashboard</h1>
-                    <p className="text-muted-foreground">Overview of system health and velocity.</p>
+                    <p className="text-muted-foreground">
+                        Real-time view of system performance, deployment velocity, and team activity.
+                        <br />
+                        Use this board to monitor production health and track release cadence.
+                    </p>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <span className="relative flex h-2 w-2">
