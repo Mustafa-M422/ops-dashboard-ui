@@ -36,10 +36,14 @@ export function Sidebar({ className }: SidebarProps) {
                                 </Button>
                             )}
                         </NavLink>
-                        <Button variant="ghost" className="w-full justify-start">
-                            <GitCommit className="mr-2 h-4 w-4" />
-                            Deployments
-                        </Button>
+                        <NavLink to="/deployments">
+                            {({ isActive }) => (
+                                <Button variant={isActive ? "secondary" : "ghost"} className="w-full justify-start">
+                                    <GitCommit className="mr-2 h-4 w-4" />
+                                    Deployments
+                                </Button>
+                            )}
+                        </NavLink>
                         <Button variant="ghost" className="w-full justify-start">
                             <Database className="mr-2 h-4 w-4" />
                             Resources

@@ -3,6 +3,7 @@ import { AppShell } from "@/components/layout/AppShell"
 import { DashboardPage } from "@/features/dashboard/DashboardPage"
 import { ActivityPage } from "@/features/activity/ActivityPage"
 import { SettingsPage } from "@/features/settings/SettingsPage"
+import { DeploymentsPage } from "@/features/deployments/DeploymentsPage"
 import { LoginPage } from "@/features/auth/LoginPage"
 
 import { ThemeProvider } from "@/components/theme-provider"
@@ -34,6 +35,7 @@ function App() {
                     <Route path="/" element={<DashboardPage />} />
                     <Route path="/activity" element={<ActivityPage />} />
                     <Route path="/settings" element={<SettingsPage />} />
+                    <Route path="/deployments" element={<DeploymentsPage />} />
                   </Routes>
                 </AppShell>
               </RequireAuth>
