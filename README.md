@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# Engineering Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive internal dashboard for tracking engineering metrics, system health, and deployment velocity. Built with **React**, **TypeScript**, and **Tailwind CSS**.
 
-Currently, two official plugins are available:
+![Dashboard Preview](./public/vite.svg) *Note: Replace with actual screenshot*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- **Real-time Overview**:
+  - **Key Metrics**: Track Total Deployments, Build Times, and Error Rates.
+  - **Activity Trends**: Visualized active user history using Recharts.
+  - **Recent Deployments**: Status table (Success, Failed, In-Progress) with environment tracking.
+- **"Live" Data Simulation**: Mock API layer simulates network latency and provides real-time "Last Updated" timestamps.
+- **Responsive Layout**:
+  - Collapsible Sidebar navigation.
+  - Mobile-friendly Drawer menu.
+  - Grid-based layouts adapting from Desktop to Mobile.
+- **Modern Design**:
+  - Clean, enterprise-ready UI using `shadcn/ui`-inspired patterns.
+  - Full aesthetic control with Tailwind CSS (HSL variable-based theming).
+- **Navigation**: Client-side routing with `react-router-dom` (Overview vs. Activity views).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **Framework**: [Vite](https://vitejs.dev/) + [React](https://react.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v3](https://tailwindcss.com/)
+- **Routing**: [React Router DOM](https://reactrouter.com/)
+- **Charts**: [Recharts](https://recharts.org/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Utils**: `clsx` & `tailwind-merge` for robust class handling.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm or yarn
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd engineering-dashboard
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+   The app will run at `http://localhost:5173` (or similar port).
+
+### Building for Production
+
+To create a production-ready build:
+```bash
+npm run build
+```
+The output will be generated in the `dist/` directory.
+
+##  Project Structure
+
+```text
+src/
+├── components/          # Shared UI components (Buttons, Cards, Inputs)
+│   ├── layout/          # AppShell, Sidebar, Navbar
+│   ├── ui/              # Atom-level design primitives
+│   └── data-display/    # Charts and complex visualizations
+├── features/            # Feature-specific logic (Domain Driven)
+│   ├── dashboard/       # Overview page components & logic
+│   └── activity/        # Activity page components
+├── lib/                 # Utilities and API mocks
+├── mocks/               # JSON data fixtures
+├── types/               # TypeScript interfaces (Data Models)
+└── App.tsx              # Main Router setup
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+##  Customization
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Theming**: Edit `src/index.css` to tweak CSS variables (Colors, Radius) that power the Tailwind config.
+- **Data**: Update `src/lib/api.ts` to swap the mock `setTimeout` with real `fetch` calls to your backend.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+*Verified locally on Windows.*
